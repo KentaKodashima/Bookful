@@ -1,12 +1,9 @@
 package kentakodashima.com.bookrecord;
 
 import android.app.Fragment;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,17 +20,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.realm.Realm;
+
 import static android.app.Activity.RESULT_OK;
 
 public class CreateFragment extends Fragment implements TextView.OnEditorActionListener {
 
-  ImageView imageView;
+  private Button uploadButton;
+  private ImageView bookImage;
+  private EditText titleEdit;
+  private EditText authorEdit;
+  private EditText descriptionEdit;
+  private EditText reviewEdit;
+  private Button saveButton;
+
+  private String titleString;
+  private String authorString;
+  private String descriptionString;
+  private String reviewString;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    EditText titleEdit = (EditText) getActivity().findViewById(R.id.book_title);
+    Realm.init(getActivity());
+
+    EditText titleEdit = (EditText) getActivity().findViewById(R.id.book_title_field);
   }
 
   @Override
@@ -49,7 +61,12 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    Button uploadButton = (Button) getActivity().findViewById(R.id.image_upload_button);
+    titleEdit = (EditText) getActivity().findViewById(R.id.book_title_field);
+    authorEdit = (EditText) getActivity().findViewById(R.id.autor_field);
+    descriptionEdit = (EditText) getActivity().findViewById(R.id.description_field);
+    reviewEdit = (EditText) getActivity().findViewById(R.id.review_field);
+
+    uploadButton = (Button) getActivity().findViewById(R.id.image_upload_button);
     uploadButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -57,6 +74,29 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, 0);
+      }
+    });
+
+    saveButton = (Button) getActivity().findViewById(R.id.save_button);
+    saveButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if (!isFieldEmpty()) {
+          Realm realm = Realm.getDefaultInstance();
+
+          titleString = titleEdit.getText().toString();
+          authorString = authorEdit.getText().toString();
+          descriptionString = descriptionEdit.getText().toString();
+          reviewString = reviewEdit.getText().toString();
+
+          Record record = new Record(titleString, authorString, descriptionString, reviewString);
+
+          realm.beginTransaction();
+          final Record managedRecord = realm.copyToRealm(record);
+          realm.commitTransaction();
+        } else {
+
+        }
       }
     });
   }
@@ -67,8 +107,8 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
       try {
         Uri uri = data.getData();
         Bitmap image = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-        imageView = (ImageView) getActivity().findViewById(R.id.book_image);
-        imageView.setImageBitmap(image);
+        bookImage = (ImageView) getActivity().findViewById(R.id.book_image);
+        bookImage.setImageBitmap(image);
       } catch (Exception e) {
         Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
         e.printStackTrace();
@@ -84,5 +124,24 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
       return true;
     }
     return false;
+  }
+
+  public boolean isFieldEmpty() {
+
+    boolean empty = false;
+    if (titleEdit.getText() == null ||
+            authorEdit.getText() == null ||
+            descriptionEdit.getText() == null ||
+            reviewEdit.getText() == null) {
+      empty = true;
+    }
+    return empty;
+  }
+
+  public void resetFields() {
+    titleEdit.setText("");
+    authorEdit.setText("");
+    descriptionEdit.setText("");
+    reviewEdit.setText("");
   }
 }
