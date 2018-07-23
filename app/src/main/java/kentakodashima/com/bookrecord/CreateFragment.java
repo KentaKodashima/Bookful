@@ -2,12 +2,14 @@ package kentakodashima.com.bookrecord;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +22,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.UUID;
+
 import io.realm.Realm;
 
 import static android.app.Activity.RESULT_OK;
+import static io.realm.internal.SyncObjectServerFacade.getApplicationContext;
 
 public class CreateFragment extends Fragment implements TextView.OnEditorActionListener {
 
@@ -39,6 +48,10 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
   private String descriptionString;
   private String reviewString;
 
+  private Bitmap selectedImage;
+  private String imageNameString;
+  private String imageFilePathString;
+
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -46,6 +59,10 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     Realm.init(getActivity());
 
     EditText titleEdit = (EditText) getActivity().findViewById(R.id.book_title_field);
+
+    // Just to know where is default.realm file
+    Realm realm = Realm.getDefaultInstance();
+    Log.i("Realm", realm.getPath());
   }
 
   @Override
@@ -91,9 +108,15 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
 
           Record record = new Record(titleString, authorString, descriptionString, reviewString);
 
+          if (!imageFilePathString.isEmpty()) {
+            record.setImageName(imageFilePathString);
+          }
+
           realm.beginTransaction();
           final Record managedRecord = realm.copyToRealm(record);
           realm.commitTransaction();
+
+          resetFields();
         } else {
 
         }
@@ -106,15 +129,55 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     if (requestCode == 0 && resultCode == RESULT_OK) {
       try {
         Uri uri = data.getData();
-        Bitmap image = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+        selectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+
         bookImage = (ImageView) getActivity().findViewById(R.id.book_image);
-        bookImage.setImageBitmap(image);
+        bookImage.setImageBitmap(selectedImage);
+
+        saveImageData(selectedImage);
+
       } catch (Exception e) {
         Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
         e.printStackTrace();
       }
     }
   }
+
+  private void saveImageData(Bitmap image) {
+//    ContextWrapper wrapper = new ContextWrapper(getApplicationContext());
+//    File directoryInInternalStrage = wrapper.getDir("images", Context.MODE_PRIVATE);
+
+    // Generate random image name
+    String fileName = UUID.randomUUID().toString() + ".png";
+    File fileDirectory = getActivity().getFilesDir();
+
+    File imageFile = new File(fileDirectory, fileName);
+    String imageFilePath = imageFile.getAbsolutePath().toString();
+
+    imageNameString = fileName;
+    imageFilePathString = imageFilePath;
+
+    try {
+      OutputStream stream = new FileOutputStream(imageFile);
+      image.compress(Bitmap.CompressFormat.PNG,100, stream);
+      stream.flush();
+      stream.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+//  private void saveImageData(Bitmap image) {
+////    // Generate random image name
+////    String fileName = UUID.randomUUID().toString() + ".png";
+////    File fileDirectory = getActivity().getFilesDir();
+////
+////    File imageFile = new File(fileDirectory, fileName);
+////    String imageFilePath = fileDirectory.toString() + fileName;
+////
+////    imageNameString = fileName;
+////    imageFilePathString = imageFilePath;
+////  }
 
   @Override
   public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -143,5 +206,7 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     authorEdit.setText("");
     descriptionEdit.setText("");
     reviewEdit.setText("");
+    bookImage.setImageResource(R.drawable.dummy);
+    selectedImage = null;
   }
 }

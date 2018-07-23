@@ -7,6 +7,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import io.realm.RealmResults;
+
 public class MainActivity extends AppCompatActivity {
 
   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

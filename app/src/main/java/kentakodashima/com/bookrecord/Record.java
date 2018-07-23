@@ -1,8 +1,13 @@
 package kentakodashima.com.bookrecord;
 
-import java.net.URI;
+import android.content.Context;
 
+import java.net.URI;
+import java.util.UUID;
+
+import io.realm.Realm;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
@@ -15,7 +20,7 @@ public class Record extends RealmObject {
   private String author;
   private String description;
   private String review;
-  private String imageURI;
+  private String imageName;
 
   public Record() {
 
@@ -26,6 +31,8 @@ public class Record extends RealmObject {
     this.author = author;
     this.description = description;
     this.review = review;
+    // Assign a random key
+    this.recordKey = UUID.randomUUID().toString();
   }
 
   public String getRecordKey() {
@@ -68,11 +75,18 @@ public class Record extends RealmObject {
     this.review = review;
   }
 
-  public String getImageURI() {
-    return imageURI;
+  public String getImageName() {
+    return imageName;
   }
 
-  public void setImageURI(String imageURI) {
-    this.imageURI = imageURI;
+  public void setImageName(String imageName) {
+    this.imageName = imageName;
+  }
+
+  public RealmResults<Record> getRecords(Context context) {
+    Realm.init(context);
+    Realm realm = Realm.getDefaultInstance();
+
+    return realm.where(Record.class).findAll();
   }
 }

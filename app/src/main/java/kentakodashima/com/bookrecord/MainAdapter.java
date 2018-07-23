@@ -1,69 +1,68 @@
 package kentakodashima.com.bookrecord;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import io.realm.RealmResults;
 
-public class MainAdapter extends BaseAdapter {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-  private int resource;
   private LayoutInflater layoutInflater;
-  private ArrayList<GridCell> listContents;
+  private RealmResults<Record> listContents;
 
-  public MainAdapter(Context context, int resource, ArrayList<GridCell> listContents) {
+  public MainAdapter(Context context, RealmResults<Record> listContents) {
     layoutInflater = LayoutInflater.from(context);
 
-    this.resource = resource;
     this.listContents = listContents;
-  }
-
-  static class ViewHolder {
-    TextView textView;
-    ImageView imageView;
-  }
-
-  @Override
-  public int getCount() {
-    return listContents.size();
-  }
-
-  @Override
-  public Object getItem(int i) {
-    return i;
-  }
-
-  @Override
-  public long getItemId(int i) {
-    return i;
   }
 
   @NonNull
   @Override
-  public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+  public MainAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-    ViewHolder holder;
+    // create a new view
+    View view = LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.grid_cell_layout, parent, false);
 
-    if (convertView == null) {
-      convertView = layoutInflater.inflate(resource, null);
-      holder = new ViewHolder();
-      holder.textView = convertView.findViewById(R.id.text_view);
-      holder.imageView = convertView.findViewById(R.id.image_view);
-      convertView.setTag(holder);
-    } else {
-      holder = (ViewHolder) convertView.getTag();
+    // set the view's size, margins, paddings and layout parameters
+    ViewHolder viewHolder = new ViewHolder(view);
+
+    return viewHolder;
+  }
+
+  @Override
+  public void onBindViewHolder(@NonNull MainAdapter.ViewHolder holder, int position) {
+
+    Record record = listContents.get(position);
+    String bookTitle = record.getTitle();
+    Bitmap imageBitmap = BitmapFactory.decodeFile(record.getImageName());
+
+    holder.textView.setText(bookTitle);
+    holder.imageView.setImageBitmap(imageBitmap);
+  }
+
+  @Override
+  public int getItemCount() {
+    return listContents.size();
+  }
+
+  static class ViewHolder extends RecyclerView.ViewHolder {
+    TextView textView;
+    ImageView imageView;
+
+    public ViewHolder(View itemView) {
+      super(itemView);
+
+      textView = (TextView) itemView.findViewById(R.id.grid_text);
+      imageView = (ImageView) itemView.findViewById(R.id.grid_image);
     }
-
-    holder.textView.setText(listContents.get(position).getContent());
-    holder.imageView.setImageResource(listContents.get(position).getImage());
-
-    return convertView;
   }
 }

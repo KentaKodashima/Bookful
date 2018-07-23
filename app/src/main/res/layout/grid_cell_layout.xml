@@ -5,13 +5,13 @@
     android:layout_height="wrap_content" >
 
     <ImageView
-        android:id="@+id/image_view"
+        android:id="@+id/grid_image"
         android:layout_width="168dp"
         android:layout_height="216dp"
         android:src="@drawable/dummy"/>
 
     <TextView
-        android:id="@+id/text_view"
+        android:id="@+id/grid_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24dp"
