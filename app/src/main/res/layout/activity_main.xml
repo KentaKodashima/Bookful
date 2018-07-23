@@ -5,18 +5,17 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.viewcontroller.MainActivity">
 
     <LinearLayout
         android:id="@+id/fragmentContainer"
-        app:layout_constrainedHeight="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/navigation"></LinearLayout>
+        app:layout_constrainedHeight="true"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

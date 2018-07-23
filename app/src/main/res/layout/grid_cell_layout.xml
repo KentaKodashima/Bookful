@@ -8,7 +8,9 @@
         android:id="@+id/grid_image"
         android:layout_width="168dp"
         android:layout_height="216dp"
-        android:src="@drawable/dummy"/>
+        android:scaleType="fitCenter"
+        android:src="@drawable/dummy"
+        android:alpha="0.4"/>
 
     <TextView
         android:id="@+id/grid_text"

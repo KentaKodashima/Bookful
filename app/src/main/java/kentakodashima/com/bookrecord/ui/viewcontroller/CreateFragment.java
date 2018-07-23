@@ -1,8 +1,7 @@
-package kentakodashima.com.bookrecord;
+package kentakodashima.com.bookrecord.ui.viewcontroller;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -29,9 +28,10 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 import io.realm.Realm;
+import kentakodashima.com.bookrecord.R;
+import kentakodashima.com.bookrecord.model.Record;
 
 import static android.app.Activity.RESULT_OK;
-import static io.realm.internal.SyncObjectServerFacade.getApplicationContext;
 
 public class CreateFragment extends Fragment implements TextView.OnEditorActionListener {
 

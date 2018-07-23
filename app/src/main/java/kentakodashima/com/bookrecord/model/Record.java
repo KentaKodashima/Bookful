@@ -1,8 +1,7 @@
-package kentakodashima.com.bookrecord;
+package kentakodashima.com.bookrecord.model;
 
 import android.content.Context;
 
-import java.net.URI;
 import java.util.UUID;
 
 import io.realm.Realm;

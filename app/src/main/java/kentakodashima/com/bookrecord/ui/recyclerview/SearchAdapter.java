@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord;
+package kentakodashima.com.bookrecord.ui.recyclerview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,13 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.realm.RealmResults;
+import kentakodashima.com.bookrecord.R;
+import kentakodashima.com.bookrecord.model.Record;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
-
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
   private LayoutInflater layoutInflater;
   private RealmResults<Record> listContents;
 
-  public MainAdapter(Context context, RealmResults<Record> listContents) {
+  public SearchAdapter(Context context, RealmResults<Record> listContents) {
     layoutInflater = LayoutInflater.from(context);
 
     this.listContents = listContents;
@@ -26,26 +27,28 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
   @NonNull
   @Override
-  public MainAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+  public SearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
     // create a new view
     View view = LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.grid_cell_layout, parent, false);
+            .inflate(R.layout.list_cell_layout, parent, false);
 
     // set the view's size, margins, paddings and layout parameters
-    ViewHolder viewHolder = new ViewHolder(view);
+    SearchAdapter.ViewHolder viewHolder = new SearchAdapter.ViewHolder(view);
 
     return viewHolder;
   }
 
   @Override
-  public void onBindViewHolder(@NonNull MainAdapter.ViewHolder holder, int position) {
+  public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
 
     Record record = listContents.get(position);
     String bookTitle = record.getTitle();
+    String bookDescription = record.getDescription();
     Bitmap imageBitmap = BitmapFactory.decodeFile(record.getImageName());
 
-    holder.textView.setText(bookTitle);
+    holder.bookTitle.setText(bookTitle);
+    holder.bookDescription.setText(bookDescription);
     holder.imageView.setImageBitmap(imageBitmap);
   }
 
@@ -55,14 +58,16 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
   }
 
   static class ViewHolder extends RecyclerView.ViewHolder {
-    TextView textView;
+    TextView bookTitle;
+    TextView bookDescription;
     ImageView imageView;
 
     public ViewHolder(View itemView) {
       super(itemView);
 
-      textView = (TextView) itemView.findViewById(R.id.grid_text);
-      imageView = (ImageView) itemView.findViewById(R.id.grid_image);
+      bookTitle = (TextView) itemView.findViewById(R.id.book_title);
+      bookDescription = (TextView) itemView.findViewById(R.id.book_description);
+      imageView = (ImageView) itemView.findViewById(R.id.icon_image);
     }
   }
 }

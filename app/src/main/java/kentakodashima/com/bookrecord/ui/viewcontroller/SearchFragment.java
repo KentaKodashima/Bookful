@@ -1,9 +1,8 @@
-package kentakodashima.com.bookrecord;
+package kentakodashima.com.bookrecord.ui.viewcontroller;
 
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import io.realm.RealmResults;
+import kentakodashima.com.bookrecord.R;
+import kentakodashima.com.bookrecord.model.Record;
+import kentakodashima.com.bookrecord.ui.recyclerview.SearchAdapter;
 
 public class SearchFragment extends Fragment {
 

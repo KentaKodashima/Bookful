@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord;
+package kentakodashima.com.bookrecord.ui.viewcontroller;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import io.realm.RealmResults;
+import kentakodashima.com.bookrecord.R;
 
 public class MainActivity extends AppCompatActivity {
 

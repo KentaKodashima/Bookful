@@ -1,0 +1,70 @@
+package kentakodashima.com.bookrecord.ui.recyclerview;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import io.realm.RealmResults;
+import kentakodashima.com.bookrecord.R;
+import kentakodashima.com.bookrecord.model.Record;
+
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
+
+  private LayoutInflater layoutInflater;
+  private RealmResults<Record> listContents;
+
+  public MainAdapter(Context context, RealmResults<Record> listContents) {
+    layoutInflater = LayoutInflater.from(context);
+
+    this.listContents = listContents;
+  }
+
+  @NonNull
+  @Override
+  public MainAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+    // create a new view
+    View view = LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.grid_cell_layout, parent, false);
+
+    // set the view's size, margins, paddings and layout parameters
+    ViewHolder viewHolder = new ViewHolder(view);
+
+    return viewHolder;
+  }
+
+  @Override
+  public void onBindViewHolder(@NonNull MainAdapter.ViewHolder holder, int position) {
+
+    Record record = listContents.get(position);
+    String bookTitle = record.getTitle();
+    Bitmap imageBitmap = BitmapFactory.decodeFile(record.getImageName());
+
+    holder.textView.setText(bookTitle);
+    holder.imageView.setImageBitmap(imageBitmap);
+  }
+
+  @Override
+  public int getItemCount() {
+    return listContents.size();
+  }
+
+  static class ViewHolder extends RecyclerView.ViewHolder {
+    TextView textView;
+    ImageView imageView;
+
+    public ViewHolder(View itemView) {
+      super(itemView);
+
+      textView = (TextView) itemView.findViewById(R.id.grid_text);
+      imageView = (ImageView) itemView.findViewById(R.id.grid_image);
+    }
+  }
+}
