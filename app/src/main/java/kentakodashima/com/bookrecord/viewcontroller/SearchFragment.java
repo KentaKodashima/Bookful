@@ -1,9 +1,9 @@
-package kentakodashima.com.bookrecord.ui.viewcontroller;
+package kentakodashima.com.bookrecord.viewcontroller;
 
 import android.app.Fragment;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import io.realm.RealmResults;
 import kentakodashima.com.bookrecord.R;
 import kentakodashima.com.bookrecord.model.Record;
-import kentakodashima.com.bookrecord.ui.recyclerview.MainAdapter;
+import kentakodashima.com.bookrecord.ui.recyclerview.SearchAdapter;
 
-public class  MainFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
-  RecyclerView gridList;
+  private RecyclerView recordList;
   private RealmResults<Record> records;
 
   @Override
@@ -27,19 +27,19 @@ public class  MainFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_main, null);
+    View view = inflater.inflate(R.layout.fragment_search, null);
 
-    gridList = (RecyclerView) view.findViewById(R.id.grid_list);
+    recordList = view.findViewById(R.id.record_list);
+
     Record recordGetter = new Record();
     records = recordGetter.getRecords(getActivity());
 
     // use a linear layout manager
-    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
+    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+    recordList.setLayoutManager(layoutManager);
 
-    gridList.setLayoutManager(layoutManager);
-
-    RecyclerView.Adapter gridAdapter = new MainAdapter(getActivity(), records);
-    gridList.setAdapter(gridAdapter);
+    RecyclerView.Adapter listAdapter = new SearchAdapter(getActivity(), records);
+    recordList.setAdapter(listAdapter);
 
     return view;
   }
@@ -52,4 +52,5 @@ public class  MainFragment extends Fragment {
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
   }
+
 }

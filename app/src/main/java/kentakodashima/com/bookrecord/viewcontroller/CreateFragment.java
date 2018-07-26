@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord.ui.viewcontroller;
+package kentakodashima.com.bookrecord.viewcontroller;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -144,9 +144,6 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
   }
 
   private void saveImageData(Bitmap image) {
-//    ContextWrapper wrapper = new ContextWrapper(getApplicationContext());
-//    File directoryInInternalStrage = wrapper.getDir("images", Context.MODE_PRIVATE);
-
     // Generate random image name
     String fileName = UUID.randomUUID().toString() + ".png";
     File fileDirectory = getActivity().getFilesDir();
@@ -166,18 +163,6 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
       e.printStackTrace();
     }
   }
-
-//  private void saveImageData(Bitmap image) {
-////    // Generate random image name
-////    String fileName = UUID.randomUUID().toString() + ".png";
-////    File fileDirectory = getActivity().getFilesDir();
-////
-////    File imageFile = new File(fileDirectory, fileName);
-////    String imageFilePath = fileDirectory.toString() + fileName;
-////
-////    imageNameString = fileName;
-////    imageFilePathString = imageFilePath;
-////  }
 
   @Override
   public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {

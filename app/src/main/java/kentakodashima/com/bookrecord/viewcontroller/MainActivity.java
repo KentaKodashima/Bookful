@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord.ui.viewcontroller;
+package kentakodashima.com.bookrecord.viewcontroller;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    navigation.setSelectedItemId(R.id.navigation_home);
   }
 
 }
