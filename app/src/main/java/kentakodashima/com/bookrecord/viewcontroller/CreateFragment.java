@@ -1,5 +1,6 @@
 package kentakodashima.com.bookrecord.viewcontroller;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -87,10 +88,17 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     uploadButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, 0);
+        if (bookImage.getDrawable() == getResources().getDrawable(R.drawable.dummy)) {
+          Intent intent = new Intent();
+          intent.setType("image/*");
+          intent.setAction(Intent.ACTION_GET_CONTENT);
+          startActivityForResult(intent, 0);
+        } else {
+          AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+          builder.setTitle("There is an image already.");
+          builder.setMessage("Please clear the image first before uploading a new image.");
+          builder.setPositiveButton("OK", 0);
+        }
       }
     });
 

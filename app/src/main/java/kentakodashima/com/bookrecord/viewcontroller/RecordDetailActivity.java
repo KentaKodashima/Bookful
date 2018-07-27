@@ -3,7 +3,6 @@ package kentakodashima.com.bookrecord.viewcontroller;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -56,13 +55,17 @@ public class RecordDetailActivity extends AppCompatActivity {
     bookDescription.setText(record.getDescription());
     bookReview.setText(record.getReview());
 
-//    getActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
   }
 
   @Override
-  public void onBackPressed() {
-    super.onBackPressed();
-    startActivity(new Intent(RecordDetailActivity.this, MainActivity.class));
-    finish();
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        finish();
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
+    }
   }
 }
