@@ -17,6 +17,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import kentakodashima.com.bookrecord.R;
 import kentakodashima.com.bookrecord.model.Record;
+import kentakodashima.com.bookrecord.ui.recyclerview.CustomItemDecoration;
 import kentakodashima.com.bookrecord.ui.recyclerview.SearchAdapter;
 
 public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener {
@@ -48,6 +49,8 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     // use a linear layout manager
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
     recordList.setLayoutManager(layoutManager);
+
+    recordList.addItemDecoration(CustomItemDecoration.generateListCellSpaces(getActivity()));
 
     listAdapter = new SearchAdapter(getActivity(), records);
     recordList.setAdapter(listAdapter);
