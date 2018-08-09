@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import io.realm.RealmResults;
 import kentakodashima.com.bookrecord.R;
 import kentakodashima.com.bookrecord.model.Record;
+import kentakodashima.com.bookrecord.ui.recyclerview.CustomItemDecoration;
 import kentakodashima.com.bookrecord.ui.recyclerview.MainAdapter;
 
 public class  MainFragment extends Fragment {
@@ -37,6 +38,7 @@ public class  MainFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
 
     gridList.setLayoutManager(layoutManager);
+    gridList.addItemDecoration(CustomItemDecoration.generateGridCellSpaces(getActivity()));
 
     RecyclerView.Adapter gridAdapter = new MainAdapter(getActivity(), records);
     gridList.setAdapter(gridAdapter);

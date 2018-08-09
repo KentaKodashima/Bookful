@@ -3,6 +3,7 @@ package kentakodashima.com.bookrecord.viewcontroller;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -37,6 +38,7 @@ import static android.app.Activity.RESULT_OK;
 public class CreateFragment extends Fragment implements TextView.OnEditorActionListener {
 
   private Button uploadButton;
+  private Button clearButton;
   private ImageView bookImage;
   private EditText titleEdit;
   private EditText authorEdit;
@@ -50,7 +52,6 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
   private String reviewString;
 
   private Bitmap selectedImage;
-  private String imageNameString;
   private String imageFilePathString;
 
   @Override
@@ -83,12 +84,13 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     authorEdit = (EditText) getActivity().findViewById(R.id.autor_field);
     descriptionEdit = (EditText) getActivity().findViewById(R.id.description_field);
     reviewEdit = (EditText) getActivity().findViewById(R.id.review_field);
+    bookImage = (ImageView) getActivity().findViewById(R.id.book_image);
 
     uploadButton = (Button) getActivity().findViewById(R.id.image_upload_button);
     uploadButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        if (bookImage.getDrawable() == getResources().getDrawable(R.drawable.dummy)) {
+        if (bookImage.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.dummy).getConstantState()) {
           Intent intent = new Intent();
           intent.setType("image/*");
           intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -97,8 +99,23 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
           AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
           builder.setTitle("There is an image already.");
           builder.setMessage("Please clear the image first before uploading a new image.");
-          builder.setPositiveButton("OK", 0);
+          builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+              dialogInterface.dismiss();
+            }
+          });
+          AlertDialog alertDialog = builder.create();
+          alertDialog.show();
         }
+      }
+    });
+
+    clearButton = getActivity().findViewById(R.id.image_clear_button);
+    clearButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
       }
     });
 
@@ -116,7 +133,8 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
 
           Record record = new Record(titleString, authorString, descriptionString, reviewString);
 
-          if (!imageFilePathString.isEmpty()) {
+          if (bookImage.getDrawable().getConstantState() != getResources().getDrawable(R.drawable.dummy).getConstantState()) {
+            saveImageData(selectedImage);
             record.setImageName(imageFilePathString);
           }
 
@@ -139,10 +157,7 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
         Uri uri = data.getData();
         selectedImage = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
 
-        bookImage = (ImageView) getActivity().findViewById(R.id.book_image);
         bookImage.setImageBitmap(selectedImage);
-
-        saveImageData(selectedImage);
 
       } catch (Exception e) {
         Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
@@ -159,7 +174,6 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     File imageFile = new File(fileDirectory, fileName);
     String imageFilePath = imageFile.getAbsolutePath().toString();
 
-    imageNameString = fileName;
     imageFilePathString = imageFilePath;
 
     try {
