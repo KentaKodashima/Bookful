@@ -33,13 +33,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     this.context = context;
   }
 
-//  public SearchAdapter(Context context, ArrayList<Record> arrayListContents) {
-//    layoutInflater = LayoutInflater.from(context);
-//
-//    this.arrayListContents = arrayListContents;
-//    this.context = context;
-//  }
-
   @NonNull
   @Override
   public SearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -90,32 +90,10 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     uploadButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        if (bookImage.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.dummy).getConstantState()) {
-          Intent intent = new Intent();
-          intent.setType("image/*");
-          intent.setAction(Intent.ACTION_GET_CONTENT);
-          startActivityForResult(intent, 0);
-        } else {
-          AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-          builder.setTitle("There is an image already.");
-          builder.setMessage("Please clear the image first before uploading a new image.");
-          builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-              dialogInterface.dismiss();
-            }
-          });
-          AlertDialog alertDialog = builder.create();
-          alertDialog.show();
-        }
-      }
-    });
-
-    clearButton = getActivity().findViewById(R.id.image_clear_button);
-    clearButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 0);
       }
     });
 

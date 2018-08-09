@@ -50,8 +50,6 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
     recordList.setLayoutManager(layoutManager);
 
-    recordList.addItemDecoration(CustomItemDecoration.generateListCellSpaces(getActivity()));
-
     listAdapter = new SearchAdapter(getActivity(), records);
     recordList.setAdapter(listAdapter);
 

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,13 +60,44 @@ public class RecordDetailActivity extends AppCompatActivity {
   }
 
   @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_actions, menu);
+    return true;
+  }
+
+  @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case android.R.id.home:
         finish();
         return true;
+      case R.id.action_edit:
+        Intent intent = new Intent(this, EditRecordActivity.class);
+        String recordKey = record.getRecordKey();
+        intent.putExtra("recordKey", recordKey);
+        this.startActivity(intent);
+        return true;
+      case R.id.action_delete:
+        deleteRecord();
+        finish();
+        return true;
       default:
         return super.onOptionsItemSelected(item);
     }
+  }
+
+  private void deleteRecord() {
+
+    File imageFile = new File(record.getImageName());
+    if (imageFile.exists()) {
+      imageFile.delete();
+    }
+    Realm realm = Realm.getDefaultInstance();
+    realm.executeTransaction(new Realm.Transaction() {
+      @Override
+      public void execute(Realm realm) {
+        record.deleteFromRealm();
+      }
+    });
   }
 }

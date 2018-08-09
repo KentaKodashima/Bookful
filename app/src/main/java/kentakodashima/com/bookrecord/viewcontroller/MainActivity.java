@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import kentakodashima.com.bookrecord.R;
@@ -52,5 +53,4 @@ public class MainActivity extends AppCompatActivity {
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     navigation.setSelectedItemId(R.id.navigation_home);
   }
-
 }

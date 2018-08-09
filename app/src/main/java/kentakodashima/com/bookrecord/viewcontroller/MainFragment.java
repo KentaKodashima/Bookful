@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import io.realm.OrderedCollectionChangeSet;
+import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.RealmResults;
 import kentakodashima.com.bookrecord.R;
 import kentakodashima.com.bookrecord.model.Record;
@@ -40,9 +42,16 @@ public class  MainFragment extends Fragment {
     gridList.setLayoutManager(layoutManager);
     gridList.addItemDecoration(CustomItemDecoration.generateGridCellSpaces(getActivity()));
 
-    RecyclerView.Adapter gridAdapter = new MainAdapter(getActivity(), records);
+    final RecyclerView.Adapter gridAdapter = new MainAdapter(getActivity(), records);
     gridList.setAdapter(gridAdapter);
 
+    // Observe the changes in records
+    records.addChangeListener(new OrderedRealmCollectionChangeListener<RealmResults<Record>>() {
+      @Override
+      public void onChange(RealmResults<Record> records, OrderedCollectionChangeSet changeSet) {
+        gridAdapter.notifyDataSetChanged();
+      }
+    });
 
     return view;
   }

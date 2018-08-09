@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viewcontroller.RecordDetailActivity">
+    android:orientation="vertical"
+    tools:context=".viewcontroller.EditRecordActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,17 +14,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingTop="30dp"
-            android:paddingBottom="30dp">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/book_image"
-                android:layout_width="168dp"
-                android:layout_height="216dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="20dp"
-                android:src="@drawable/dummy" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/edit_book_image"
+                    android:layout_width="168dp"
+                    android:layout_height="216dp"
+                    android:src="@drawable/dummy"
+                    android:layout_marginRight="25dp"/>
+
+                <Button
+                    android:id="@+id/edit_image_upload_button"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:text="Upload Image"
+                    android:layout_gravity="bottom"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,18 +46,18 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:padding="10dp"
                     android:text="Book Title"
+                    android:textSize="20sp"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:background="@color/colorPrimary"
+                    android:padding="10dp" />
 
-                <TextView
-                    android:id="@+id/title_text"
+                <EditText
+                    android:id="@+id/edit_book_title_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:padding="5dp" />
 
             </LinearLayout>
 
@@ -56,18 +69,18 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:padding="10dp"
                     android:text="Author"
+                    android:textSize="20sp"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:background="@color/colorPrimary"
+                    android:padding="10dp" />
 
-                <TextView
-                    android:id="@+id/autor_text"
+                <EditText
+                    android:id="@+id/edit_autor_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:padding="5dp" />
 
             </LinearLayout>
 
@@ -79,18 +92,18 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:padding="10dp"
                     android:text="Description"
+                    android:textSize="20sp"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:background="@color/colorPrimary"
+                    android:padding="10dp" />
 
-                <TextView
-                    android:id="@+id/description_text"
+                <EditText
+                    android:id="@+id/edit_description_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:padding="5dp" />
 
             </LinearLayout>
 
@@ -102,20 +115,27 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:padding="10dp"
                     android:text="Review"
+                    android:textSize="20sp"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:background="@color/colorPrimary"
+                    android:padding="10dp" />
 
-                <TextView
-                    android:id="@+id/review_text"
+                <EditText
+                    android:id="@+id/edit_review_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:padding="5dp" />
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/edit_save_button"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Save this change"/>
 
         </LinearLayout>
 
