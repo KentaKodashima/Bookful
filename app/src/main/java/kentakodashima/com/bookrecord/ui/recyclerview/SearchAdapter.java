@@ -65,11 +65,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     Record record = listContents.get(position);
     String bookTitle = record.getTitle();
     String bookDescription = record.getDescription();
-    Bitmap imageBitmap = BitmapFactory.decodeFile(record.getImageName());
 
+    if (record.getImageName() != null) {
+      Bitmap imageBitmap = BitmapFactory.decodeFile(record.getImageName());
+      holder.imageView.setImageBitmap(imageBitmap);
+    } else {
+      holder.imageView.setImageResource(R.drawable.dummy);
+    }
     holder.bookTitle.setText(bookTitle);
     holder.bookDescription.setText(bookDescription);
-    holder.imageView.setImageBitmap(imageBitmap);
   }
 
   @Override

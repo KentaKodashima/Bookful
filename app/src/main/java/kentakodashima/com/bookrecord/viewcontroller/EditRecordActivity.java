@@ -5,8 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,6 +32,8 @@ public class EditRecordActivity extends AppCompatActivity {
   private EditText bookAuthor;
   private EditText bookDescription;
   private EditText bookReview;
+  private Button uploadButton;
+  private Button clearButton;
   private Button saveButton;
 
   private String titleString;
@@ -41,6 +46,7 @@ public class EditRecordActivity extends AppCompatActivity {
 
   private String receivedRecordKey;
   private Record record;
+  private File imageFile;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -52,31 +58,72 @@ public class EditRecordActivity extends AppCompatActivity {
     bookAuthor = findViewById(R.id.edit_autor_field);
     bookDescription = findViewById(R.id.edit_description_field);
     bookReview = findViewById(R.id.edit_review_field);
+    uploadButton = findViewById(R.id.edit_image_upload_button);
+    clearButton = findViewById(R.id.edit_image_clear_button);
     saveButton = findViewById(R.id.edit_save_button);
 
+    // Retrieve the RealmObject from previous activity
     Intent intent = getIntent();
     receivedRecordKey = intent.getStringExtra("recordKey");
 
+    // Initialize Realm database
     Realm.init(this);
     Realm realm = Realm.getDefaultInstance();
     record = realm.where(Record.class).equalTo("recordKey", receivedRecordKey).findFirst();
 
-    File imageFile = new File(record.getImageName());
-
-    if(imageFile.exists()) {
-      Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
-      bookImage.setImageBitmap(imageBitmap);
+    // Retrieve data from the RealmObject
+    if (record.getImageName() != null) {
+      imageFile = new File(record.getImageName());
+      if(imageFile.exists()) {
+        Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+        bookImage.setImageBitmap(imageBitmap);
+      }
+    } else {
+      bookImage.setImageResource(R.drawable.dummy);
     }
     bookTitle.setText(record.getTitle());
     bookAuthor.setText(record.getAuthor());
     bookDescription.setText(record.getDescription());
     bookReview.setText(record.getReview());
 
+    uploadButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        uploadImage();
+      }
+    });
+
+    clearButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        clearImage();
+      }
+    });
+
+    saveButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        saveChangeButton();
+      }
+    });
+
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
   }
 
   private void saveChangeButton() {
     if (!isFieldEmpty()) {
+
+      // Delete the image from file directory
+      if (record.getImageName() != null) {
+        if(imageFile.exists()) {
+          imageFile.delete();
+        }
+      }
+      titleString = bookTitle.getText().toString();
+      authorString = bookAuthor.getText().toString();
+      descriptionString = bookDescription.getText().toString();
+      reviewString = bookReview.getText().toString();
+
       Realm realm = Realm.getDefaultInstance();
 
       realm.executeTransaction(new Realm.Transaction() {
@@ -86,11 +133,18 @@ public class EditRecordActivity extends AppCompatActivity {
           record.setAuthor(authorString);
           record.setDescription(descriptionString);
           record.setReview(reviewString);
+          // ToDo: check the condition
+          if (bookImage.getDrawable().getConstantState() != getResources().getDrawable(R.drawable.dummy).getConstantState()) {
+            saveImageData(selectedImage);
+            record.setImageName(imageFilePathString);
+          }
         }
       });
 
-    } else {
+      finish();
 
+    } else {
+      // ToDo: Empty Alert
     }
   }
 
@@ -123,7 +177,8 @@ public class EditRecordActivity extends AppCompatActivity {
   }
 
   private void saveImageData(Bitmap image) {
-    // Generate random image name
+
+    // Generate random image name and directory
     String fileName = UUID.randomUUID().toString() + ".png";
     File fileDirectory = this.getFilesDir();
 
@@ -139,6 +194,48 @@ public class EditRecordActivity extends AppCompatActivity {
       stream.close();
     } catch (IOException e) {
       e.printStackTrace();
+    }
+  }
+
+  private void uploadImage() {
+    if (bookImage.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.dummy).getConstantState()) {
+      Intent intent = new Intent();
+      intent.setType("image/*");
+      intent.setAction(Intent.ACTION_GET_CONTENT);
+      startActivityForResult(intent, 0);
+    } else {
+      AlertDialog.Builder builder = new AlertDialog.Builder(this);
+      builder.setTitle("There is an image already.");
+      builder.setMessage("Please clear the image first before uploading a new image.");
+      builder.setPositiveButton("OK", null);
+      builder.show();
+    }
+  }
+
+  private void clearImage() {
+    if (bookImage.getDrawable() != getResources().getDrawable(R.drawable.dummy) && record.getImageName() != null) {
+      Realm.init(this);
+      Realm realm = Realm.getDefaultInstance();
+      realm.executeTransaction(new Realm.Transaction() {
+        @Override
+        public void execute(Realm realm) {
+          record.setImageName(null);
+        }
+      });
+    }
+    if (bookImage.getDrawable() != getResources().getDrawable(R.drawable.dummy)) {
+      bookImage.setImageResource(R.drawable.dummy);
+    }
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        finish();
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
     }
   }
 }

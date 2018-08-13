@@ -26,6 +26,7 @@ public class RecordDetailActivity extends AppCompatActivity {
 
   private String receivedRecordKey;
   private Record record;
+  private File imageFile;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +39,22 @@ public class RecordDetailActivity extends AppCompatActivity {
     bookDescription = findViewById(R.id.description_text);
     bookReview = findViewById(R.id.review_text);
 
+    // Retrieve the RealmObject from previous activity
     Intent intent = getIntent();
     receivedRecordKey = intent.getStringExtra("recordKey");
 
+    // Initialize Realm database
     Realm.init(this);
     Realm realm = Realm.getDefaultInstance();
     record = realm.where(Record.class).equalTo("recordKey", receivedRecordKey).findFirst();
 
-    File imageFile = new File(record.getImageName());
-
-    if(imageFile.exists()) {
-      Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
-      bookImage.setImageBitmap(imageBitmap);
+    // Retrieve data from the RealmObject
+    if (record.getImageName() != null) {
+      imageFile = new File(record.getImageName());
+      if(imageFile.exists()) {
+        Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+        bookImage.setImageBitmap(imageBitmap);
+      }
     }
     bookTitle.setText(record.getTitle());
     bookAuthor.setText(record.getAuthor());

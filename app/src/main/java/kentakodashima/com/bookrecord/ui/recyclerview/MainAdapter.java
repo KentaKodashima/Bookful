@@ -62,10 +62,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     Record record = listContents.get(position);
     String bookTitle = record.getTitle();
-    Bitmap imageBitmap = BitmapFactory.decodeFile(record.getImageName());
 
+    if (record.getImageName() != null) {
+      Bitmap imageBitmap = BitmapFactory.decodeFile(record.getImageName());
+      holder.imageView.setImageBitmap(imageBitmap);
+    } else {
+      holder.imageView.setImageResource(R.drawable.dummy);
+    }
     holder.textView.setText(bookTitle);
-    holder.imageView.setImageBitmap(imageBitmap);
   }
 
   @Override
