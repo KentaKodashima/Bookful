@@ -12,7 +12,12 @@ import android.widget.TextView;
 
 import java.io.File;
 
+import javax.annotation.Nullable;
+
+import io.realm.ObjectChangeSet;
 import io.realm.Realm;
+import io.realm.RealmModel;
+import io.realm.RealmObjectChangeListener;
 import kentakodashima.com.bookrecord.R;
 import kentakodashima.com.bookrecord.model.Record;
 
@@ -27,6 +32,8 @@ public class RecordDetailActivity extends AppCompatActivity {
   private String receivedRecordKey;
   private Record record;
   private File imageFile;
+
+  private Realm realm;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +52,7 @@ public class RecordDetailActivity extends AppCompatActivity {
 
     // Initialize Realm database
     Realm.init(this);
-    Realm realm = Realm.getDefaultInstance();
+    realm = Realm.getDefaultInstance();
     record = realm.where(Record.class).equalTo("recordKey", receivedRecordKey).findFirst();
 
     // Retrieve data from the RealmObject
@@ -60,6 +67,21 @@ public class RecordDetailActivity extends AppCompatActivity {
     bookAuthor.setText(record.getAuthor());
     bookDescription.setText(record.getDescription());
     bookReview.setText(record.getReview());
+
+    record.addChangeListener(new RealmObjectChangeListener<Record>() {
+      @Override
+      public void onChange(Record record, @Nullable ObjectChangeSet changeSet) {
+        if (changeSet.isFieldChanged("title")) {
+          bookTitle.setText(record.getTitle());
+        } else if (changeSet.isFieldChanged("author")) {
+          bookAuthor.setText(record.getAuthor());
+        } else if (changeSet.isFieldChanged("description")) {
+          bookDescription.setText(record.getDescription());
+        } else if (changeSet.isFieldChanged("review")) {
+          bookReview.setText(record.getReview());
+        }
+      }
+    });
 
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
   }
@@ -97,7 +119,7 @@ public class RecordDetailActivity extends AppCompatActivity {
     if (imageFile.exists()) {
       imageFile.delete();
     }
-    Realm realm = Realm.getDefaultInstance();
+    realm = Realm.getDefaultInstance();
     realm.executeTransaction(new Realm.Transaction() {
       @Override
       public void execute(Realm realm) {
