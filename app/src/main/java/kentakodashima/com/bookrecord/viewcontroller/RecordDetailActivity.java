@@ -79,6 +79,12 @@ public class RecordDetailActivity extends AppCompatActivity {
           bookDescription.setText(record.getDescription());
         } else if (changeSet.isFieldChanged("review")) {
           bookReview.setText(record.getReview());
+        } else if (changeSet.isFieldChanged("imageName")) {
+          if (record.getImageName() != null) {
+            imageFile = new File(record.getImageName());
+            Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+            bookImage.setImageBitmap(imageBitmap);
+          }
         }
       }
     });

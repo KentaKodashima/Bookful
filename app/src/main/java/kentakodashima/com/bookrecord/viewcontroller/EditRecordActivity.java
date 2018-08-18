@@ -113,12 +113,6 @@ public class EditRecordActivity extends AppCompatActivity {
   private void saveChangeButton() {
     if (!isFieldEmpty()) {
 
-      // Delete the image from file directory
-      if (record.getImageName() != null) {
-        if(imageFile.exists()) {
-          imageFile.delete();
-        }
-      }
       titleString = bookTitle.getText().toString();
       authorString = bookAuthor.getText().toString();
       descriptionString = bookDescription.getText().toString();
@@ -134,9 +128,11 @@ public class EditRecordActivity extends AppCompatActivity {
           record.setDescription(descriptionString);
           record.setReview(reviewString);
           // ToDo: check the condition
-          if (bookImage.getDrawable().getConstantState() != getResources().getDrawable(R.drawable.dummy).getConstantState()) {
-            saveImageData(selectedImage);
-            record.setImageName(imageFilePathString);
+          if (record.getImageName() == null) {
+            if (selectedImage != null) {
+              saveImageData(selectedImage);
+              record.setImageName(imageFilePathString);
+            }
           }
         }
       });
@@ -212,8 +208,17 @@ public class EditRecordActivity extends AppCompatActivity {
     }
   }
 
+  // ToDo: check the condition
   private void clearImage() {
     if (bookImage.getDrawable() != getResources().getDrawable(R.drawable.dummy) && record.getImageName() != null) {
+
+      // Delete image from the file directory
+      imageFile = new File(record.getImageName());
+      if (imageFile.exists()) {
+        imageFile.delete();
+      }
+
+      // Delete image name from the Record obj
       Realm.init(this);
       Realm realm = Realm.getDefaultInstance();
       realm.executeTransaction(new Realm.Transaction() {
@@ -223,6 +228,8 @@ public class EditRecordActivity extends AppCompatActivity {
         }
       });
     }
+
+    // Set dummy image
     if (bookImage.getDrawable() != getResources().getDrawable(R.drawable.dummy)) {
       bookImage.setImageResource(R.drawable.dummy);
     }
