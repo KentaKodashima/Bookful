@@ -73,13 +73,17 @@ public class RecordDetailActivity extends AppCompatActivity {
       public void onChange(Record record, @Nullable ObjectChangeSet changeSet) {
         if (changeSet.isFieldChanged("title")) {
           bookTitle.setText(record.getTitle());
-        } else if (changeSet.isFieldChanged("author")) {
+        }
+        if (changeSet.isFieldChanged("author")) {
           bookAuthor.setText(record.getAuthor());
-        } else if (changeSet.isFieldChanged("description")) {
+        }
+        if (changeSet.isFieldChanged("description")) {
           bookDescription.setText(record.getDescription());
-        } else if (changeSet.isFieldChanged("review")) {
+        }
+        if (changeSet.isFieldChanged("review")) {
           bookReview.setText(record.getReview());
-        } else if (changeSet.isFieldChanged("imageName")) {
+        }
+        if (changeSet.isFieldChanged("imageName")) {
           if (record.getImageName() != null) {
             imageFile = new File(record.getImageName());
             Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
