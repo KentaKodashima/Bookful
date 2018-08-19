@@ -8,6 +8,8 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +35,6 @@ public class EditRecordActivity extends AppCompatActivity {
   private EditText bookReview;
   private Button uploadButton;
   private Button clearButton;
-  private Button saveButton;
 
   private String titleString;
   private String authorString;
@@ -59,7 +60,6 @@ public class EditRecordActivity extends AppCompatActivity {
     bookReview = findViewById(R.id.edit_review_field);
     uploadButton = findViewById(R.id.edit_image_upload_button);
     clearButton = findViewById(R.id.edit_image_clear_button);
-    saveButton = findViewById(R.id.edit_save_button);
 
     // Retrieve the RealmObject from previous activity
     Intent intent = getIntent();
@@ -96,13 +96,6 @@ public class EditRecordActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         clearImage();
-      }
-    });
-
-    saveButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        saveChangeButton();
       }
     });
   }
@@ -229,6 +222,22 @@ public class EditRecordActivity extends AppCompatActivity {
     // Set dummy image
     if (bookImage.getDrawable() != getResources().getDrawable(R.drawable.dummy)) {
       bookImage.setImageResource(R.drawable.dummy);
+    }
+  }
+
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_edit_actions, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.action_done:
+        saveChangeButton();
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
     }
   }
 }

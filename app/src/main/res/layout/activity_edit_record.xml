@@ -145,13 +145,6 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/edit_save_button"
-                android:layout_width="140dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:text="Save this change"/>
-
         </LinearLayout>
 
     </ScrollView>
