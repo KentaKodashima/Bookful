@@ -10,13 +10,13 @@
         android:layout_height="216dp"
         android:scaleType="fitCenter"
         android:src="@drawable/dummy"
-        android:alpha="0.4"/>
+        android:alpha="0.3"/>
 
     <TextView
         android:id="@+id/grid_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24dp"
+        android:textSize="20sp"
         android:layout_centerInParent="true"
         android:text="center"
         android:textColor="@color/colorTextBase"

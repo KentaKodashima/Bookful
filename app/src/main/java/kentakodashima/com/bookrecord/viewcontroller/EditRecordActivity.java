@@ -117,7 +117,6 @@ public class EditRecordActivity extends AppCompatActivity {
           record.setAuthor(authorString);
           record.setDescription(descriptionString);
           record.setReview(reviewString);
-          // ToDo: check the condition
           if (record.getImageName() == null) {
             if (selectedImage != null) {
               saveImageData(selectedImage);
@@ -131,6 +130,7 @@ public class EditRecordActivity extends AppCompatActivity {
 
     } else {
       // ToDo: Empty Alert
+      alertGenerator(R.string.edit_done_alert_title, R.string.edit_done_upload_alert_message);
     }
   }
 
@@ -190,15 +190,18 @@ public class EditRecordActivity extends AppCompatActivity {
       intent.setAction(Intent.ACTION_GET_CONTENT);
       startActivityForResult(intent, 0);
     } else {
-      AlertDialog.Builder builder = new AlertDialog.Builder(this);
-      builder.setTitle("There is an image already.");
-      builder.setMessage("Please clear the image first before uploading a new image.");
-      builder.setPositiveButton("OK", null);
-      builder.show();
+      alertGenerator(R.string.image_upload_alert_title, R.string.image_upload_alert_message);
     }
   }
 
-  // ToDo: check the condition
+  private void alertGenerator(int title, int message) {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle(title);
+    builder.setMessage(message);
+    builder.setPositiveButton("OK", null);
+    builder.show();
+  }
+
   private void clearImage() {
     if (bookImage.getDrawable() != getResources().getDrawable(R.drawable.dummy) && record.getImageName() != null) {
 
