@@ -11,10 +11,12 @@
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
-        android:layout_width="389dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_marginStart="@dimen/activity_margin"
+        android:layout_marginEnd="@dimen/activity_margin"
         android:orientation="vertical"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/navigation"

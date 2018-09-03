@@ -37,7 +37,7 @@ public class  MainFragment extends Fragment {
     records = recordGetter.getRecords(getActivity());
 
     // use a linear layout manager
-    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
+    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
 
     gridList.setLayoutManager(layoutManager);
     gridList.addItemDecoration(CustomItemDecoration.generateGridCellSpaces(getActivity()));
