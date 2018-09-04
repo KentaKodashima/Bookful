@@ -17,7 +17,6 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import kentakodashima.com.bookrecord.R;
 import kentakodashima.com.bookrecord.model.Record;
-import kentakodashima.com.bookrecord.ui.recyclerview.CustomItemDecoration;
 import kentakodashima.com.bookrecord.ui.recyclerview.SearchAdapter;
 
 public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener {

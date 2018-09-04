@@ -7,7 +7,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +43,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -61,14 +61,13 @@
                     android:hint="Enter the book's title here."
                     android:background="@android:color/transparent"
                     android:textSize="18sp"
-                    android:padding="5dp" />
+                    android:padding="10dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -87,14 +86,13 @@
                     android:hint="Enter the author of the book here."
                     android:background="@android:color/transparent"
                     android:textSize="18sp"
-                    android:padding="5dp" />
+                    android:padding="10dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -113,14 +111,13 @@
                     android:hint="Enter the book's description here."
                     android:background="@android:color/transparent"
                     android:textSize="18sp"
-                    android:padding="5dp" />
+                    android:padding="10dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -139,7 +136,7 @@
                     android:hint="Enter your review of the book here."
                     android:background="@android:color/transparent"
                     android:textSize="18sp"
-                    android:padding="5dp" />
+                    android:padding="10dp" />
 
             </LinearLayout>
 

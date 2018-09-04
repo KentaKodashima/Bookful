@@ -12,8 +12,11 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/appBaseColor"
+        android:layout_marginTop="20dp"
+        android:background="@color/searchbarColor"
         android:iconifiedByDefault="false"
+        android:queryHint="Search by the book name."
+        android:queryBackground="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/appBackground"
     android:orientation="vertical"
     tools:context=".viewcontroller.EditRecordActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,35 +26,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal"
-                android:padding="10dp"
-                android:gravity="center_horizontal">
+                android:weightSum="1">
 
                 <ImageView
                     android:id="@+id/edit_book_image"
-                    android:layout_width="168dp"
+                    android:layout_width="0dp"
                     android:layout_height="216dp"
-                    android:layout_marginRight="25dp"/>
+                    android:layout_weight="0.5" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
                     android:orientation="vertical"
-                    android:layout_gravity="bottom">
+                    android:layout_weight="0.5">
 
                     <Button
                         android:id="@+id/edit_image_upload_button"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:text="Upload Image"
-                        android:layout_gravity="bottom"/>
+                        android:layout_gravity="bottom"
+                        android:text="Upload Image" />
 
                     <Button
                         android:id="@+id/edit_image_clear_button"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:text="Clear Image"
-                        android:layout_gravity="bottom"/>
+                        android:layout_gravity="bottom"
+                        android:text="Clear Image" />
 
                 </LinearLayout>
 
@@ -61,20 +69,20 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Book Title"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
                     android:background="@color/appBaseColor"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:text="Book Title"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/edit_book_title_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter the book's title here."
                     android:background="@android:color/transparent"
-                    android:textSize="18sp"
-                    android:padding="5dp" />
+                    android:hint="Enter the book's title here."
+                    android:padding="10dp"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -86,20 +94,20 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Author"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
                     android:background="@color/appBaseColor"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:text="Author"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/edit_autor_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter the author of the book here."
                     android:background="@android:color/transparent"
-                    android:textSize="18sp"
-                    android:padding="5dp" />
+                    android:hint="Enter the author of the book here."
+                    android:padding="10dp"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -111,20 +119,20 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Description"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
                     android:background="@color/appBaseColor"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:text="Description"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/edit_description_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter the book's description here."
                     android:background="@android:color/transparent"
-                    android:textSize="18sp"
-                    android:padding="5dp" />
+                    android:hint="Enter the book's description here."
+                    android:padding="10dp"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -136,20 +144,20 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Review"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
                     android:background="@color/appBaseColor"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:text="Review"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/edit_review_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your review of the book here."
                     android:background="@android:color/transparent"
-                    android:textSize="18sp"
-                    android:padding="5dp" />
+                    android:hint="Enter your review of the book here."
+                    android:padding="10dp"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
