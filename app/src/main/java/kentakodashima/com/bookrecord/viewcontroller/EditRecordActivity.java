@@ -129,8 +129,7 @@ public class EditRecordActivity extends AppCompatActivity {
       finish();
 
     } else {
-      // ToDo: Empty Alert
-      alertGenerator(R.string.edit_done_alert_title, R.string.edit_done_upload_alert_message);
+      alertGenerator(R.string.empty_fields_alert_title, R.string.empty_fields_alert_message);
     }
   }
 

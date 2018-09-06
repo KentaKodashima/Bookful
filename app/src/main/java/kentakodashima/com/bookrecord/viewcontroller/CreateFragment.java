@@ -2,6 +2,7 @@ package kentakodashima.com.bookrecord.viewcontroller;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,7 +39,6 @@ import static android.app.Activity.RESULT_OK;
 public class CreateFragment extends Fragment implements TextView.OnEditorActionListener {
 
   private Button uploadButton;
-  private Button clearButton;
   private ImageView bookImage;
   private EditText titleEdit;
   private EditText authorEdit;
@@ -61,10 +61,6 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     Realm.init(getActivity());
 
     EditText titleEdit = (EditText) getActivity().findViewById(R.id.book_title_field);
-
-    // Just to know where is default.realm file
-    Realm realm = Realm.getDefaultInstance();
-    Log.i("Realm", realm.getPath());
   }
 
   @Override
@@ -101,31 +97,41 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     saveButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if (!isFieldEmpty()) {
-          Realm realm = Realm.getDefaultInstance();
-
-          titleString = titleEdit.getText().toString();
-          authorString = authorEdit.getText().toString();
-          descriptionString = descriptionEdit.getText().toString();
-          reviewString = reviewEdit.getText().toString();
-
-          Record record = new Record(titleString, authorString, descriptionString, reviewString);
-
-          if (bookImage.getDrawable().getConstantState() != getResources().getDrawable(R.drawable.dummy).getConstantState()) {
-            saveImageData(selectedImage);
-            record.setImageName(imageFilePathString);
-          }
-
-          realm.beginTransaction();
-          final Record managedRecord = realm.copyToRealm(record);
-          realm.commitTransaction();
-
-          resetFields();
-        } else {
-
-        }
+        saveButtonTapped();
       }
     });
+  }
+
+  private void saveButtonTapped() {
+    if (!isFieldEmpty()) {
+      Realm realm = Realm.getDefaultInstance();
+
+      titleString = titleEdit.getText().toString();
+      authorString = authorEdit.getText().toString();
+      descriptionString = descriptionEdit.getText().toString();
+      reviewString = reviewEdit.getText().toString();
+
+      Record record = new Record(titleString, authorString, descriptionString, reviewString);
+
+      if (bookImage.getDrawable().getConstantState() != getResources().getDrawable(R.drawable.dummy).getConstantState()) {
+        saveImageData(selectedImage);
+        record.setImageName(imageFilePathString);
+      }
+
+      realm.beginTransaction();
+      final Record managedRecord = realm.copyToRealm(record);
+      realm.commitTransaction();
+
+      resetFields();
+
+      MainFragment mainFragment = new MainFragment();
+      FragmentTransaction mainTransaction = getFragmentManager().beginTransaction();
+      mainTransaction.replace(R.id.fragmentContainer, mainFragment);
+      mainTransaction.addToBackStack(null);
+      mainTransaction.commit();
+    } else {
+      alertGenerator(R.string.empty_fields_alert_title, R.string.empty_fields_alert_message);
+    }
   }
 
   @Override
@@ -174,13 +180,21 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     return false;
   }
 
+  private void alertGenerator(int title, int message) {
+    android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+    builder.setTitle(title);
+    builder.setMessage(message);
+    builder.setPositiveButton("OK", null);
+    builder.show();
+  }
+
   public boolean isFieldEmpty() {
 
     boolean empty = false;
-    if (titleEdit.getText() == null ||
-            authorEdit.getText() == null ||
-            descriptionEdit.getText() == null ||
-            reviewEdit.getText() == null) {
+    if (titleEdit.getText().toString().isEmpty() ||
+            authorEdit.getText().toString().isEmpty() ||
+            descriptionEdit.getText().toString().isEmpty() ||
+            reviewEdit.getText().toString().isEmpty()) {
       empty = true;
     }
     return empty;

@@ -28,6 +28,7 @@
                     android:id="@+id/book_image"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:minHeight="216dp"
                     android:layout_weight="0.5"
                     android:scaleType="centerCrop"
                     android:layout_marginRight="10dp"

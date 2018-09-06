@@ -88,6 +88,8 @@ public class RecordDetailActivity extends AppCompatActivity {
             imageFile = new File(record.getImageName());
             Bitmap imageBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
             bookImage.setImageBitmap(imageBitmap);
+          } else {
+            bookImage.setImageResource(R.drawable.dummy);
           }
         }
       }
@@ -125,8 +127,8 @@ public class RecordDetailActivity extends AppCompatActivity {
 
   private void deleteRecord() {
 
-    File imageFile = new File(record.getImageName());
-    if (imageFile.exists()) {
+    if (record.getImageName() != null) {
+      File imageFile = new File(record.getImageName());
       imageFile.delete();
     }
     realm = Realm.getDefaultInstance();
