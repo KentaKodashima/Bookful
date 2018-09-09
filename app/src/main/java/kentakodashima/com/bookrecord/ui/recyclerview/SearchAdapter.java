@@ -10,11 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import io.realm.Realm;
 import io.realm.RealmResults;
 import kentakodashima.com.bookrecord.R;
 import kentakodashima.com.bookrecord.model.Record;
@@ -23,8 +26,10 @@ import kentakodashima.com.bookrecord.viewcontroller.RecordDetailActivity;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
   private LayoutInflater layoutInflater;
   private RealmResults<Record> listContents;
-  private ArrayList<Record> arrayListContents;
   private Context context;
+
+  private Record record;
+  private Realm realm;
 
   public SearchAdapter(Context context, RealmResults<Record> listContents) {
     layoutInflater = LayoutInflater.from(context);
@@ -81,10 +86,32 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     return listContents.size();
   }
 
-  static class ViewHolder extends RecyclerView.ViewHolder {
+  public void removeItem(int position) {
+
+    record = listContents.get(position);
+
+    if (record.getImageName() != null) {
+      File imageFile = new File(record.getImageName());
+      imageFile.delete();
+    }
+    realm = Realm.getDefaultInstance();
+    realm.executeTransaction(new Realm.Transaction() {
+      @Override
+      public void execute(Realm realm) {
+        record.deleteFromRealm();
+      }
+    });
+
+    // notify RV that the item is removed by position to perform delete animation
+    notifyItemRemoved(position);
+  }
+
+  public static class ViewHolder extends RecyclerView.ViewHolder {
     TextView bookTitle;
     TextView bookDescription;
     ImageView imageView;
+
+    public LinearLayout viewForeground;
 
     public ViewHolder(View itemView) {
       super(itemView);
@@ -92,6 +119,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
       bookTitle = (TextView) itemView.findViewById(R.id.book_title);
       bookDescription = (TextView) itemView.findViewById(R.id.book_description);
       imageView = (ImageView) itemView.findViewById(R.id.icon_image);
+      viewForeground = itemView.findViewById(R.id.list_cell);
     }
   }
 }

@@ -7,8 +7,8 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
-    <color name="appFrameColor">#E1DAAD</color>
-    <color name="appBaseColor">#EB9176</color>
+    <color name="appBaseColor">#383086</color>
     <color name="appBackground">#F8F8F8</color>
     <color name="searchbarColor">#F0F0F0</color>
+    <color name="buttonColor">#8988C1</color>
 </resources>

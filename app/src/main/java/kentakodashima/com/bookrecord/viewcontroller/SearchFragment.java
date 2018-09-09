@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.SearchView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,14 +21,14 @@ import kentakodashima.com.bookrecord.model.Record;
 import kentakodashima.com.bookrecord.ui.recyclerview.CustomDividerItemDecoration;
 import kentakodashima.com.bookrecord.ui.recyclerview.SearchAdapter;
 
-public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener, RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
   private RecyclerView recordList;
   private SearchView searchView;
   private RealmResults<Record> records;
   private ArrayList<Record> filteredRecords;
   private Record recordGetter;
-  private RecyclerView.Adapter listAdapter;
+  private SearchAdapter listAdapter;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,9 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     listAdapter = new SearchAdapter(getActivity(), records);
     recordList.setAdapter(listAdapter);
 
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+    new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recordList);
+
     // SearchViewにOnQueryChangeListenerを設定
     searchView.setOnQueryTextListener(this);
 
@@ -68,6 +72,14 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+  }
+
+  @Override
+  public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+    if (viewHolder instanceof SearchAdapter.ViewHolder) {
+      // remove the item from recycler view
+      listAdapter.removeItem(viewHolder.getAdapterPosition());
+    }
   }
 
   @Override

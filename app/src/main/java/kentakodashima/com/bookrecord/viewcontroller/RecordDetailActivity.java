@@ -126,7 +126,6 @@ public class RecordDetailActivity extends AppCompatActivity {
   }
 
   private void deleteRecord() {
-
     if (record.getImageName() != null) {
       File imageFile = new File(record.getImageName());
       imageFile.delete();
