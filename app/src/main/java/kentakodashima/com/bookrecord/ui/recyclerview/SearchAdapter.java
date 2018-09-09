@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -111,7 +112,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     TextView bookDescription;
     ImageView imageView;
 
-    public LinearLayout viewForeground;
+    public RelativeLayout viewForeground;
+//    public RelativeLayout viewBackground;
 
     public ViewHolder(View itemView) {
       super(itemView);
@@ -119,7 +121,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
       bookTitle = (TextView) itemView.findViewById(R.id.book_title);
       bookDescription = (TextView) itemView.findViewById(R.id.book_description);
       imageView = (ImageView) itemView.findViewById(R.id.icon_image);
-      viewForeground = itemView.findViewById(R.id.list_cell);
+      viewForeground = itemView.findViewById(R.id.view_foreground);
+    }
+
+    public RelativeLayout getViewForeground() {
+      return viewForeground;
     }
   }
 }

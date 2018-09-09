@@ -11,4 +11,6 @@
     <color name="appBackground">#F8F8F8</color>
     <color name="searchbarColor">#F0F0F0</color>
     <color name="buttonColor">#8988C1</color>
+
+    <color name="recyclerListCellBackground">#ff0000</color>
 </resources>

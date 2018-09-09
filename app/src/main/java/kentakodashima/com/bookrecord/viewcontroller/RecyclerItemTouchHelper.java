@@ -1,23 +1,26 @@
 package kentakodashima.com.bookrecord.viewcontroller;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import kentakodashima.com.bookrecord.ui.recyclerview.SearchAdapter;
+import kentakodashima.com.bookrecord.R;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
-
+  private Context context;
   private RecyclerItemTouchHelperListener listener;
-
   final ColorDrawable background = new ColorDrawable(Color.RED);
 
-  public RecyclerItemTouchHelper(int dragDirection, int swipeDirection, RecyclerItemTouchHelperListener listener) {
+  public RecyclerItemTouchHelper(Context context, int dragDirection, int swipeDirection, RecyclerItemTouchHelperListener listener) {
     super(dragDirection, swipeDirection);
     this.listener = listener;
+    this.context = context;
   }
 
   @Override
@@ -26,45 +29,33 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
   }
 
   @Override
-  public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-    listener.onSwiped(viewHolder, direction, viewHolder.getAdapterPosition());
-  }
-
-  @Override
-  public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-    if (viewHolder != null) {
-      final View foregroundView = ((SearchAdapter.ViewHolder) viewHolder).viewForeground;
-
-      getDefaultUIUtil().onSelected(foregroundView);
-    }
-  }
-
-  @Override
-  public void onChildDrawOver(Canvas c, RecyclerView recyclerView,
-                              RecyclerView.ViewHolder viewHolder, float dX, float dY,
-                              int actionState, boolean isCurrentlyActive) {
-    final View foregroundView = ((SearchAdapter.ViewHolder) viewHolder).viewForeground;
-    getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY,
-            actionState, isCurrentlyActive);
-  }
-
-  @Override
-  public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-    final View foregroundView = ((SearchAdapter.ViewHolder) viewHolder).viewForeground;
-    getDefaultUIUtil().clearView(foregroundView);
-  }
-
-  @Override
   public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
     super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 
-    final View foregroundView = ((SearchAdapter.ViewHolder) viewHolder).viewForeground;
+    View itemView = viewHolder.itemView;
 
-    background.setBounds(0, foregroundView.getTop(),   foregroundView.getLeft() + (int)dX, foregroundView.getBottom());
-
+    background.setBounds(itemView.getRight(), itemView.getTop(), itemView.getLeft(), itemView.getBottom());
     background.draw(c);
 
-    getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY, actionState, isCurrentlyActive);
+    Drawable icon = context.getResources().getDrawable(R.drawable.ic_delete_white_24dp);
+    float itemHeight = itemView.getBottom() - itemView.getTop();
+    float intrinsicWidth = icon.getIntrinsicWidth();
+    float intrinsicHeight = icon.getIntrinsicHeight();
+
+    float iconTop = itemView.getTop() + (itemHeight - intrinsicHeight) / 2;
+    float iconMargin = (itemHeight - intrinsicHeight) / 2;
+    float iconLeft = itemView.getRight() - iconMargin - intrinsicWidth;
+    float iconRight = itemView.getRight() - iconMargin;
+    float iconBottom = iconTop + intrinsicHeight;
+
+    icon.setBounds((int)iconLeft, (int)iconTop, (int)iconRight, (int)iconBottom);
+    icon.draw(c);
+  }
+
+
+  @Override
+  public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+    listener.onSwiped(viewHolder, direction, viewHolder.getAdapterPosition());
   }
 
   @Override

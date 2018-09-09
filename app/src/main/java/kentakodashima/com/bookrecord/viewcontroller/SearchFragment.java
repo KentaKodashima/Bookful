@@ -56,7 +56,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     listAdapter = new SearchAdapter(getActivity(), records);
     recordList.setAdapter(listAdapter);
 
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(getActivity(),0, ItemTouchHelper.LEFT, this);
     new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recordList);
 
     // SearchViewにOnQueryChangeListenerを設定
