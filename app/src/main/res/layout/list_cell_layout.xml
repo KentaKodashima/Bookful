@@ -16,9 +16,11 @@
             android:id="@+id/icon_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
             android:maxWidth="50dp"
-            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginRight="@dimen/recyclerview_list_cell_margin"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
             android:src="@drawable/dummy" />
 
         <TextView
@@ -35,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="Book Description"
+            android:layout_marginTop="5dp"
             android:layout_below="@id/book_title"
             android:layout_toRightOf="@id/icon_image" />
     </RelativeLayout>

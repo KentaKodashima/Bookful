@@ -11,4 +11,6 @@
     <string name="image_upload_alert_message">Please clear the image first before uploading a new image.</string>
     <string name="empty_fields_alert_title">There are empty fields.</string>
     <string name="empty_fields_alert_message">Please fill out all fields.</string>
+
+    <string name="no_data_label">There is no record yet.</string>
 </resources>

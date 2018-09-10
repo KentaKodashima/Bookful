@@ -56,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Book Title"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/title_text_size"
                     android:textColor="@color/white"
                     android:background="@color/appBaseColor"
                     android:padding="10dp" />
@@ -81,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Author"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/title_text_size"
                     android:textColor="@color/white"
                     android:background="@color/appBaseColor"
                     android:padding="10dp" />
@@ -106,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Description"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/title_text_size"
                     android:textColor="@color/white"
                     android:background="@color/appBaseColor"
                     android:padding="10dp" />
@@ -132,7 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Review"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/title_text_size"
                     android:textColor="@color/white"
                     android:background="@color/appBaseColor"
                     android:padding="10dp" />

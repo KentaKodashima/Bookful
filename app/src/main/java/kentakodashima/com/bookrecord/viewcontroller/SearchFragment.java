@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ import kentakodashima.com.bookrecord.ui.recyclerview.SearchAdapter;
 public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener, RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
   private RecyclerView recordList;
+  private TextView emptyView;
   private SearchView searchView;
   private RealmResults<Record> records;
   private ArrayList<Record> filteredRecords;
@@ -41,6 +43,7 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     View view = inflater.inflate(R.layout.fragment_search, null);
 
     recordList = view.findViewById(R.id.record_list);
+    emptyView = view.findViewById(R.id.empty_view);
     searchView = view.findViewById(R.id.searchView);
 
     recordGetter = new Record();
@@ -59,7 +62,15 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(getActivity(),0, ItemTouchHelper.LEFT, this);
     new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recordList);
 
-    // SearchViewにOnQueryChangeListenerを設定
+    if (records.size() == 0) {
+      recordList.setVisibility(View.GONE);
+      emptyView.setVisibility(View.VISIBLE);
+    } else {
+      recordList.setVisibility(View.VISIBLE);
+      emptyView.setVisibility(View.GONE);
+    }
+
+    // Set OnQueryChangeListener to SearchView
     searchView.setOnQueryTextListener(this);
 
     return view;
