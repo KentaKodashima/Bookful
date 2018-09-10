@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Book Record</string>
+    <string name="title_create" translatable="false">作成</string>
+    <string name="title_search" translatable="false">検索</string>
+    <string name="edit" translatable="false">編集</string>
+    <string name="delete" translatable="false">削除</string>
+    <string name="image_upload_alert_title" translatable="false">既に画像が登録されています。</string>
+    <string name="image_upload_alert_message" translatable="false">新しい画像を選択する前に、既存の画像を削除してください。</string>
+    <string name="empty_fields_alert_title" translatable="false">空欄の項目があります。</string>
+    <string name="empty_fields_alert_message" translatable="false">全ての項目を入力してください。</string>
+    <string name="no_data_label" translatable="false">まだ表示する記録がありません。</string>
+    <string name="title_home" translatable="false">ホーム</string>
+    <string name="searchview_query_hint">本の名前から検索</string>
+</resources>

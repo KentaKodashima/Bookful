@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"
         android:background="@color/searchbarColor"
         android:iconifiedByDefault="false"
-        android:queryHint="Search by the book name."
+        android:queryHint="@string/searchview_query_hint"
         android:queryBackground="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,16 +1,17 @@
 <resources>
     <string name="app_name">Book Record</string>
-    <string name="title_home">Home</string>
-    <string name="title_create">Create</string>
-    <string name="title_search">Search</string>
-    <string name="edit">Edit</string>
-    <string name="delete">Delete</string>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_create" translatable="false">Create</string>
+    <string name="title_search" translatable="false">Search</string>
+    <string name="edit" translatable="false">Edit</string>
+    <string name="delete" translatable="false">Delete</string>
     <string name="done">Done</string>
 
-    <string name="image_upload_alert_title">There is an image already.</string>
-    <string name="image_upload_alert_message">Please clear the image first before uploading a new image.</string>
-    <string name="empty_fields_alert_title">There are empty fields.</string>
-    <string name="empty_fields_alert_message">Please fill out all fields.</string>
+    <string name="image_upload_alert_title" translatable="false">There is an image already.</string>
+    <string name="image_upload_alert_message" translatable="false">Please clear the image first before uploading a new image.</string>
+    <string name="empty_fields_alert_title" translatable="false">There are empty fields.</string>
+    <string name="empty_fields_alert_message" translatable="false">Please fill out all fields.</string>
 
-    <string name="no_data_label">There is no record yet.</string>
+    <string name="no_data_label" translatable="false">There is no record yet.</string>
+    <string name="searchview_query_hint">Search by the book name.</string>
 </resources>
