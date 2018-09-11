@@ -53,9 +53,17 @@ public class  MainFragment extends Fragment {
       @Override
       public void onChange(RealmResults<Record> records, OrderedCollectionChangeSet changeSet) {
         gridAdapter.notifyDataSetChanged();
+
+        checkData(records);
       }
     });
 
+    checkData(records);
+
+    return view;
+  }
+
+  private void checkData(RealmResults<Record> records) {
     if (records.size() == 0) {
       gridList.setVisibility(View.GONE);
       emptyView.setVisibility(View.VISIBLE);
@@ -63,8 +71,6 @@ public class  MainFragment extends Fragment {
       gridList.setVisibility(View.VISIBLE);
       emptyView.setVisibility(View.GONE);
     }
-
-    return view;
   }
 
   @Override

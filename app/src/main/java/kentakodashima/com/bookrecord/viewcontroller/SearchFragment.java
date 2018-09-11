@@ -62,6 +62,15 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(getActivity(),0, ItemTouchHelper.LEFT, this);
     new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recordList);
 
+    checkData(records);
+
+    // Set OnQueryChangeListener to SearchView
+    searchView.setOnQueryTextListener(this);
+
+    return view;
+  }
+
+  private void checkData(RealmResults<Record> records) {
     if (records.size() == 0) {
       recordList.setVisibility(View.GONE);
       emptyView.setVisibility(View.VISIBLE);
@@ -69,11 +78,6 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
       recordList.setVisibility(View.VISIBLE);
       emptyView.setVisibility(View.GONE);
     }
-
-    // Set OnQueryChangeListener to SearchView
-    searchView.setOnQueryTextListener(this);
-
-    return view;
   }
 
   @Override
