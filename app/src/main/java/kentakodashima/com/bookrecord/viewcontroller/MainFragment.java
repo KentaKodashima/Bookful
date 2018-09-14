@@ -1,6 +1,7 @@
 package kentakodashima.com.bookrecord.viewcontroller;
 
 import android.app.Fragment;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.realm.OrderedCollectionChangeSet;
@@ -23,6 +25,7 @@ public class  MainFragment extends Fragment {
   RecyclerView gridList;
   private TextView emptyView;
   private RealmResults<Record> records;
+  private ImageView gridImageView;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,10 @@ public class  MainFragment extends Fragment {
 
     gridList = (RecyclerView) view.findViewById(R.id.grid_list);
     emptyView = (TextView) view.findViewById(R.id.empty_view);
+    gridImageView = (ImageView) view.findViewById(R.id.grid_image);
+    // TODO: Set imageView flexible height and width
+//    gridImageView.getLayoutParams().height = view.getHeight() / 2;
+
     Record recordGetter = new Record();
     records = recordGetter.getRecords(getActivity());
 

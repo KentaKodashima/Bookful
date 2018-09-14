@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
   private EditText descriptionEdit;
   private EditText reviewEdit;
   private Button saveButton;
+  private BottomNavigationView bottomNavigationView;
 
   private String titleString;
   private String authorString;
@@ -81,6 +83,7 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
     descriptionEdit = (EditText) getActivity().findViewById(R.id.description_field);
     reviewEdit = (EditText) getActivity().findViewById(R.id.review_field);
     bookImage = (ImageView) getActivity().findViewById(R.id.book_image);
+    bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.navigation);
 
     uploadButton = (Button) getActivity().findViewById(R.id.image_upload_button);
     uploadButton.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +132,7 @@ public class CreateFragment extends Fragment implements TextView.OnEditorActionL
       mainTransaction.replace(R.id.fragmentContainer, mainFragment);
       mainTransaction.addToBackStack(null);
       mainTransaction.commit();
+      bottomNavigationView.setSelectedItemId(R.id.navigation_home);
     } else {
       alertGenerator(R.string.empty_fields_alert_title, R.string.empty_fields_alert_message);
     }

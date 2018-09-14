@@ -16,11 +16,10 @@
             android:id="@+id/icon_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="50dp"
             android:adjustViewBounds="true"
             android:layout_marginRight="@dimen/recyclerview_list_cell_margin"
-            android:scaleType="centerCrop"
-            android:layout_centerVertical="true"
+            android:maxWidth="50dp"
+            android:scaleType="centerInside"
             android:src="@drawable/dummy" />
 
         <TextView

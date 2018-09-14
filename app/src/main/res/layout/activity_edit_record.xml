@@ -54,7 +54,10 @@
                         android:layout_gravity="bottom"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/button_basic"
-                        android:padding="@dimen/button_padding"
+                        android:paddingTop="@dimen/button_padding_top_bottom"
+                        android:paddingBottom="@dimen/button_padding_top_bottom"
+                        android:paddingLeft="@dimen/button_padding_left_right"
+                        android:paddingRight="@dimen/button_padding_left_right"
                         android:text="Upload Image"
                         android:textColor="@color/white" />
 
