@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord.viewcontroller;
+package kentakodashima.com.bookful.viewcontroller;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,10 +16,9 @@ import javax.annotation.Nullable;
 
 import io.realm.ObjectChangeSet;
 import io.realm.Realm;
-import io.realm.RealmModel;
 import io.realm.RealmObjectChangeListener;
-import kentakodashima.com.bookrecord.R;
-import kentakodashima.com.bookrecord.model.Record;
+import kentakodashima.com.bookful.R;
+import kentakodashima.com.bookful.model.Record;
 
 public class RecordDetailActivity extends AppCompatActivity {
 

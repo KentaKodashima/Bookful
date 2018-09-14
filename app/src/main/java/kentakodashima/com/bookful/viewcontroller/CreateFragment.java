@@ -1,10 +1,8 @@
-package kentakodashima.com.bookrecord.viewcontroller;
+package kentakodashima.com.bookful.viewcontroller;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,7 +10,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,8 +29,8 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 import io.realm.Realm;
-import kentakodashima.com.bookrecord.R;
-import kentakodashima.com.bookrecord.model.Record;
+import kentakodashima.com.bookful.R;
+import kentakodashima.com.bookful.model.Record;
 
 import static android.app.Activity.RESULT_OK;
 

@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord.ui.recyclerview;
+package kentakodashima.com.bookful.ui.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord.viewcontroller;
+package kentakodashima.com.bookful.viewcontroller;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import kentakodashima.com.bookrecord.R;
+import kentakodashima.com.bookful.R;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
   private Context context;

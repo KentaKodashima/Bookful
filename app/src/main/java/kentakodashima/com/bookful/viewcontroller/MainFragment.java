@@ -1,7 +1,6 @@
-package kentakodashima.com.bookrecord.viewcontroller;
+package kentakodashima.com.bookful.viewcontroller;
 
 import android.app.Fragment;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,10 +14,10 @@ import android.widget.TextView;
 import io.realm.OrderedCollectionChangeSet;
 import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.RealmResults;
-import kentakodashima.com.bookrecord.R;
-import kentakodashima.com.bookrecord.model.Record;
-import kentakodashima.com.bookrecord.ui.recyclerview.CustomItemDecoration;
-import kentakodashima.com.bookrecord.ui.recyclerview.MainAdapter;
+import kentakodashima.com.bookful.model.Record;
+import kentakodashima.com.bookful.R;
+import kentakodashima.com.bookful.ui.recyclerview.CustomItemDecoration;
+import kentakodashima.com.bookful.ui.recyclerview.MainAdapter;
 
 public class  MainFragment extends Fragment {
 

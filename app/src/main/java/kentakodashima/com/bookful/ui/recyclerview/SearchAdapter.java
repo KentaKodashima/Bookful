@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord.ui.recyclerview;
+package kentakodashima.com.bookful.ui.recyclerview;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,19 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import kentakodashima.com.bookrecord.R;
-import kentakodashima.com.bookrecord.model.Record;
-import kentakodashima.com.bookrecord.viewcontroller.RecordDetailActivity;
+import kentakodashima.com.bookful.viewcontroller.RecordDetailActivity;
+import kentakodashima.com.bookful.R;
+import kentakodashima.com.bookful.model.Record;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
   private LayoutInflater layoutInflater;

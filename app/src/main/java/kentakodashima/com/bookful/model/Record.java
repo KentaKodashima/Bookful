@@ -1,8 +1,6 @@
-package kentakodashima.com.bookrecord.model;
+package kentakodashima.com.bookful.model;
 
 import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.util.UUID;
 

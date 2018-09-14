@@ -1,11 +1,11 @@
-package kentakodashima.com.bookrecord.ui.recyclerview;
+package kentakodashima.com.bookful.ui.recyclerview;
 
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import kentakodashima.com.bookrecord.R;
+import kentakodashima.com.bookful.R;
 
 public class CustomItemDecoration extends RecyclerView.ItemDecoration {
 

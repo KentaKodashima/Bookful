@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord.ui.recyclerview;
+package kentakodashima.com.bookful.ui.recyclerview;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import io.realm.RealmResults;
-import kentakodashima.com.bookrecord.R;
-import kentakodashima.com.bookrecord.model.Record;
-import kentakodashima.com.bookrecord.viewcontroller.RecordDetailActivity;
+import kentakodashima.com.bookful.model.Record;
+import kentakodashima.com.bookful.viewcontroller.RecordDetailActivity;
+import kentakodashima.com.bookful.R;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 

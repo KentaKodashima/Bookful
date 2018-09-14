@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord.viewcontroller;
+package kentakodashima.com.bookful.viewcontroller;
 
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -17,10 +17,10 @@ import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import kentakodashima.com.bookrecord.R;
-import kentakodashima.com.bookrecord.model.Record;
-import kentakodashima.com.bookrecord.ui.recyclerview.CustomDividerItemDecoration;
-import kentakodashima.com.bookrecord.ui.recyclerview.SearchAdapter;
+import kentakodashima.com.bookful.model.Record;
+import kentakodashima.com.bookful.ui.recyclerview.SearchAdapter;
+import kentakodashima.com.bookful.R;
+import kentakodashima.com.bookful.ui.recyclerview.CustomDividerItemDecoration;
 
 public class SearchFragment extends Fragment implements SearchView.OnQueryTextListener, RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 

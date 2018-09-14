@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord;
+package kentakodashima.com.bookful;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

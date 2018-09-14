@@ -1,14 +1,13 @@
-package kentakodashima.com.bookrecord.viewcontroller;
+package kentakodashima.com.bookful.viewcontroller;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 
-import kentakodashima.com.bookrecord.R;
+import kentakodashima.com.bookful.R;
 
 public class MainActivity extends AppCompatActivity {
 

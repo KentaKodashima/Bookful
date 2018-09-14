@@ -1,4 +1,4 @@
-package kentakodashima.com.bookrecord.viewcontroller;
+package kentakodashima.com.bookful.viewcontroller;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,8 +23,8 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 import io.realm.Realm;
-import kentakodashima.com.bookrecord.R;
-import kentakodashima.com.bookrecord.model.Record;
+import kentakodashima.com.bookful.R;
+import kentakodashima.com.bookful.model.Record;
 
 public class EditRecordActivity extends AppCompatActivity {
 

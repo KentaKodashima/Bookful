@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Book Record</string>
+    <string name="app_name">Bookful</string>
     <string name="title_home">Home</string>
     <string name="title_create">Create</string>
     <string name="title_search">Search</string>
