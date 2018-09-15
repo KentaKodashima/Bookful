@@ -19,7 +19,8 @@
     <string name="save_this_book">この本を保存する</string>
     <string name="upload_image">画像をアップロード</string>
     <string name="done">完了</string>
-    <string name="hint_book_title">Enter the book\'s title here.</string>
-    <string name="hint_author">Enter the author of the book here.</string>
-    <string name="hint_description">Enter the book\'s description here.</string>
+    <string name="hint_book_title">タイトルを入力してください。</string>
+    <string name="hint_author">著作者名を入力してください。</string>
+    <string name="hint_description">本の概要を説明してください。</string>
+    <string name="hint_review">書評を入力してください。</string>
 </resources>
